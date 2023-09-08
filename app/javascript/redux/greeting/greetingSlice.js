@@ -4,7 +4,7 @@ export const getRandomGreeting = createAsyncThunk(
   'greetings/random',
   async () => {
     try {
-      const res = await fetch('/greetings/greeting');
+      const res = await fetch('http://localhost:3000/greetings/greeting');
       if (!res.ok) {
         throw new Error('Network response was not ok');
       }
@@ -26,7 +26,7 @@ const greetingSlice = createSlice({
   initialState,
   extraReducers(builder) {
     builder.addCase(getRandomGreeting.fulfilled, (state, action) => {
-      state.message = action.payload;
+      return {...state, message: action.payload}
     });
   },
 });
